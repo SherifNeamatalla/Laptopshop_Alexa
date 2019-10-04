@@ -1,0 +1,98 @@
+.headSection {
+  h3 {
+    width: 20%;
+    padding: 0 0 0 1rem;
+  }
+  #searchInput {
+    width: 5%;
+  }
+}
+
+.mainArea {
+  .widgetArea {
+    width: 15%;
+  }
+
+  .listArea {
+    width: 80%;
+  }
+
+  .mustHave {
+    background-color: rgb(255, 234, 175);
+    border: 2px solid red;
+  }
+
+  mat-card-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+
+  table {
+    cursor: pointer;
+  }
+
+  .mat-list-avatar {
+    width: 25%;
+    height: auto;
+    border-radius: 0px;
+  }
+}
+.mat-list-base .mat-list-item.mat-3-line {
+  height: auto;
+}
+.sticky {
+  position: fixed;
+  top: 0;
+  overflow: hidden;
+  z-index: 10;
+  width: 100%;
+}
+.feedback {
+  float: left;
+  max-width: 240px;
+  margin-bottom: 1px;
+}
+.element {
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 3px;
+  width: 100%;
+}
+
+.element span {
+  margin: 3px;
+}
+
+.element img {
+  width: 8%;
+  margin-top:-1px;
+  float:right;
+}
+td.mat-cell:last-of-type {
+  max-width: 300px;
+}
+.flex-container {
+  margin-bottom: 10px;
+}
+.price p {
+  margin: 0px;
+  margin-top: 10px;
+}
+td.mat-cell,
+td.mat-footer-cell,
+th.mat-header-cell {
+  max-width: 750px;
+  padding-left: 10px;
+}
+.stars {
+  width: 100%;
+  float: left;
+}
+.title {
+  margin-bottom: 8px;
+}
+.description {
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 5px;
+}

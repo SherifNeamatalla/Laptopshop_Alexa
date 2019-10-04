@@ -1,0 +1,45 @@
+<app-header pageTitle="Details" helpTitle="Help text for details page"></app-header>
+<mat-card class=alexa-sign>
+  <mat-card-header>
+    <div mat-card-avatar class="alexa-image"></div>
+    <mat-card-title>Hint: Use Amazon Alexa to refine your query!</mat-card-title>
+    <mat-card-subtitle>(e.g. " I'm looking for a bigger screen")</mat-card-subtitle>
+  </mat-card-header>
+  <!--
+  <button (click)="sendItem()" *ngIf="laptops">send</button>
+  <button (click)="sendLaptops()" [routerLink]="['/home',laptops]" *ngIf="laptops">Result</button>-->
+
+</mat-card>
+
+<mat-card fxLayout="row" fxLayoutGap="20px" style="padding:20px; position:center" *ngIf="item">
+
+  <mat-card-content>
+    <img style="width:200px" src="{{item.imagePath}}" />
+  </mat-card-content>
+
+  <mat-card-content>
+    <h2>{{item.productTitle}} </h2>
+    <div>
+      <strong>Brand: </strong> {{item.brandName}}<br>
+      <strong>RAM: </strong> {{item.ram}} GB<br>
+      <strong>Hard drive type: </strong>{{item.hardDriveType}}<br>
+      <strong>Hard drive capacity: </strong>{{item.hddSize}} GB<br>
+      <strong>Display size: </strong>{{item.displaySize}} Zoll<br>
+      <strong>Operating System: </strong>{{item.operatingSystem}}<br>
+        <strong>Chipset brand: </strong>{{item.chipsetBrand}}<br>
+      <strong>processor speed: </strong>{{item.processorSpeed}}<br>
+      <strong>processor count: </strong>{{item.processorCount}}<br>
+      <strong>processor brand: </strong>{{item.processorManufacturer}}<br>
+        <strong>Average rating: </strong>{{item.avgRating}}<br>
+
+
+
+      <div fxLayout="row" fxLayoutAlign="end" fxLayoutGap="20px">
+        <div><button mat-raised-button color="primary" routerLink="/home"> Back</button></div>
+        <div><button mat-raised-button color="accent" routerLink="/cart">Add to basket</button></div>
+        <!--<button type="button" style="background-color:blue; color:red">Add to basket</button>-->
+      </div>
+
+    </div>
+  </mat-card-content>
+</mat-card>

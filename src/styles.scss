@@ -1,0 +1,23 @@
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+
+
+$color-negative-rating: #f6bc41 !default;
+$color-ok-rating: #f6bc41 !default;
+$color-positive-rating: #f6bc41 !default;
+$color-default-rating: #f6bc41 !default;
+.rating {
+  float:left;
+}
+@import '~css-star-rating/scss/star-rating';
+
+* {
+  font-family: Lato;
+}
+.example-icon {
+  padding: 0 5px;
+}
+.example-spacer {
+  flex: 1 1 auto;
+}
+

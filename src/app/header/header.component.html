@@ -1,0 +1,29 @@
+  <mat-toolbar fxLayout="row" fxLayoutAlign="start center" color="primary">
+    <div class="logoContainer">
+      <img
+        id="logo"
+        alt="Laptopshop Logo"
+        src="../assets/images/laptop-icon.jpg"
+        routerLink="/"
+      />
+    </div>
+
+    <strong>{{ pageTitle }}</strong>
+    <span class="example-spacer"></span>
+    <button
+      [matMenuTriggerFor]="helpMenu"
+      class="cartButton"
+      mat-mini-fab
+      color="accent"
+    >
+      <mat-icon>help</mat-icon>
+    </button>
+    <span class="example-icon"></span>
+    <button class="cartButton" mat-mini-fab routerLink="/cart" color="accent">
+      <mat-icon>shopping_cart</mat-icon>
+    </button>
+
+    <mat-menu #helpMenu="matMenu">
+      <button mat-menu-item>{{ helpTitle }} </button>
+    </mat-menu>
+  </mat-toolbar>

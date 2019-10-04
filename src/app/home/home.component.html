@@ -1,0 +1,539 @@
+<app-header
+  pageTitle="Laptopshop"
+  helpTitle="Help text for home page"
+></app-header>
+<section
+  class="headSection"
+  fxLayout="row"
+  fxLayoutAlign="start end"
+  (scroll)="onWindowScroll($event)"
+>
+  <h3>Filter :</h3>
+<!--  <div class="searchInput">-->
+<!--    <form [formGroup]="globalForm" (ngSubmit)="onSubmit()">-->
+<!--      <mat-form-field>-->
+<!--        <input-->
+<!--          type="text"-->
+<!--          matInput-->
+<!--          placeholder="Enter search text ..."-->
+<!--          formControlName="globalSearch"-->
+<!--          name="searchValue"-->
+<!--        />-->
+<!--      </mat-form-field>-->
+<!--    </form>-->
+<!--  </div>-->
+</section>
+
+<section class="mainArea" fxLayout="row" fxLayoutAlign="start">
+  <div class="widgetArea" fxLayout="column" fxLayoutAlign="start">
+    <form [formGroup]="widgetForm" (ngSubmit)="onSubmit()">
+      <mat-card fxLayout="column" formGroupName="brandName" [ngClass]="arr['brandName'] === 0 ? '' : 'mustHave'" [matTooltip]="onHover('brandName')">
+        <mat-card-title>Brand Name</mat-card-title>
+        <div *ngFor="let brand of brands">
+          <mat-checkbox
+            (change)="onChange($event, 'brandName', 'brandNameValue')"
+            [value]="brand.id"
+            >{{ brand.name }}</mat-checkbox
+          >
+        </div>
+        <mat-slider
+          formControlName="weight"
+          color="primary"
+          min="1"
+          max="5"
+          step="1"
+          *ngIf="!arr['brandName']"
+          (change)="onInputChange($event,'brandName')"
+          matTooltip="Pushing the slider all the way to the right will make this a must have requirement" [matTooltipPosition]="'after'"
+        ></mat-slider>
+        <mat-slider
+          formControlName="weight"
+          color="warn"
+          min="1"
+          max="5"
+          step="1"
+          value="5"
+          *ngIf="arr['brandName']"
+          (change)="onInputChange($event,'brandName')"
+        ></mat-slider>
+        <div fxLayout="row" fxLayoutAlign="space-between">
+          <span>optional</span>
+          <span>must have</span>
+        </div>
+      </mat-card>
+
+      <mat-card fxLayout="column" formGroupName="price" [ngClass]="arr['price'] === 0 ? '' : 'mustHave'" [matTooltip]="onHover('price')">
+        <mat-card-title>Price</mat-card-title>
+        <div *ngFor="let option of prices">
+          <mat-checkbox
+            (change)="onChange($event, 'price', 'priceRange')"
+            [value]="option.id"
+            >{{ option.name }}</mat-checkbox
+          >
+        </div>
+        <mat-slider
+          formControlName="weight"
+          color="primary"
+          min="1"
+          max="5"
+          step="1"
+          *ngIf="!arr['price']"
+          (change)="onInputChange($event,'price')"
+        ></mat-slider>
+        <mat-slider
+          formControlName="weight"
+          color="warn"
+          min="1"
+          max="5"
+          step="1"
+          value="5"
+          *ngIf="arr['price']"
+          (change)="onInputChange($event,'price')"
+        ></mat-slider>
+        <div fxLayout="row" fxLayoutAlign="space-between">
+          <span>optional</span>
+          <span>must have</span>
+        </div>
+      </mat-card>
+
+      <mat-card fxLayout="column" formGroupName="avgRating" [ngClass]="arr['avgRating'] === 0 ? '' : 'mustHave'" [matTooltip]="onHover('avgRating')">
+        <mat-card-title>Rating</mat-card-title>
+        <div *ngFor="let option of ratings">
+          <mat-checkbox
+            (change)="onChange($event, 'avgRating', 'avgRatingRange')"
+            [value]="option.id"
+            ><star-rating  class="filter" [starType]="'svg'" [rating]="option.id.minValue"></star-rating><span>& more</span></mat-checkbox
+          >
+        </div>
+        <mat-slider
+          formControlName="weight"
+          color="primary"
+          min="1"
+          max="5"
+          step="1"
+          *ngIf="!arr['avgRating']"
+          (change)="onInputChange($event,'avgRating')"
+        ></mat-slider>
+        <mat-slider
+          formControlName="weight"
+          color="warn"
+          min="1"
+          max="5"
+          step="1"
+          value="5"
+          *ngIf="arr['avgRating']"
+          (change)="onInputChange($event,'avgRating')"
+        ></mat-slider>
+        <div fxLayout="row" fxLayoutAlign="space-between">
+          <span>optional</span>
+          <span>must have</span>
+        </div>
+      </mat-card>
+
+      <mat-card fxLayout="column" formGroupName="processorManufacturer" [ngClass]="arr['processorManufacturer'] === 0 ? '' : 'mustHave'" [matTooltip]="onHover('processorManufacturer')">
+        <mat-card-title>Processor Manufacturer</mat-card-title>
+        <div *ngFor="let option of processorManufacturers">
+          <mat-checkbox
+            (change)="onChange($event, 'processorManufacturer', 'processorManufacturerValue')"
+            [value]="option.id"
+            >{{ option.name }}</mat-checkbox
+          >
+        </div>
+        <mat-slider
+          formControlName="weight"
+          color="primary"
+          min="1"
+          max="5"
+          step="1"
+          *ngIf="!arr['processorManufacturer']"
+          (change)="onInputChange($event,'processorManufacturer')"
+        ></mat-slider>
+        <mat-slider
+          formControlName="weight"
+          color="warn"
+          min="1"
+          max="5"
+          step="1"
+          value="5"
+          *ngIf="arr['processorManufacturer']"
+          (change)="onInputChange($event,'processorManufacturer')"
+        ></mat-slider>
+        <div fxLayout="row" fxLayoutAlign="space-between">
+          <span>optional</span>
+          <span>must have</span>
+        </div>
+      </mat-card>
+
+      <mat-card fxLayout="column" formGroupName="screenSize" [ngClass]="arr['screenSize'] === 0 ? '' : 'mustHave'" [matTooltip]="onHover('screenSize')">
+        <mat-card-title>Screen Size</mat-card-title>
+        <div *ngFor="let option of screenSizes">
+          <mat-checkbox
+            (change)="onChange($event, 'screenSize', 'screenSizeRange')"
+            [value]="option.id"
+            >{{ option.name }}</mat-checkbox
+          >
+        </div>
+        <mat-slider
+          formControlName="weight"
+          color="primary"
+          min="1"
+          max="5"
+          step="1"
+          *ngIf="!arr['screenSize']"
+          (change)="onInputChange($event,'screenSize')"
+        ></mat-slider>
+        <mat-slider
+          formControlName="weight"
+          color="warn"
+          min="1"
+          max="5"
+          step="1"
+          value="5"
+          *ngIf="arr['screenSize']"
+          (change)="onInputChange($event,'screenSize')"
+        ></mat-slider>
+        <div fxLayout="row" fxLayoutAlign="space-between">
+          <span>optional</span>
+          <span>must have</span>
+        </div>
+      </mat-card>
+
+      <mat-card fxLayout="column" formGroupName="processorCount" [ngClass]="arr['processorCount'] === 0 ? '' : 'mustHave'" [matTooltip]="onHover('processorCount')">
+        <mat-card-title>Processor Type</mat-card-title>
+        <div *ngFor="let option of processorCores">
+          <mat-checkbox
+            (change)="onChange($event, 'processorCount', 'processorCountValue')"
+            [value]="option.id"
+            >{{ option.name }}</mat-checkbox
+          >
+        </div>
+        <mat-slider
+          formControlName="weight"
+          color="primary"
+          min="1"
+          max="5"
+          step="1"
+          *ngIf="!arr['processorCount']"
+          (change)="onInputChange($event,'processorCount')"
+        ></mat-slider>
+        <mat-slider
+          formControlName="weight"
+          color="warn"
+          min="1"
+          max="5"
+          step="1"
+          value="5"
+          *ngIf="arr['processorCount']"
+          (change)="onInputChange($event,'processorCount')"
+        ></mat-slider>
+        <div fxLayout="row" fxLayoutAlign="space-between">
+          <span>optional</span>
+          <span>must have</span>
+        </div>
+      </mat-card>
+
+      <mat-card fxLayout="column" formGroupName="processorSpeed" [ngClass]="arr['processorSpeed'] === 0 ? '' : 'mustHave'" [matTooltip]="onHover('processorSpeed')">
+        <mat-card-title>Processor Speed</mat-card-title>
+        <div *ngFor="let option of processorSpeeds">
+          <mat-checkbox
+            (change)="onChange($event, 'processorSpeed', 'processorSpeedRange')"
+            [value]="option.id"
+            >{{ option.name }}</mat-checkbox
+          >
+        </div>
+        <mat-slider
+          formControlName="weight"
+          color="primary"
+          min="1"
+          max="5"
+          step="1"
+          *ngIf="!arr['processorSpeed']"
+          (change)="onInputChange($event,'processorSpeed')"
+        ></mat-slider>
+        <mat-slider
+          formControlName="weight"
+          color="warn"
+          min="1"
+          max="5"
+          step="1"
+          value="5"
+          *ngIf="arr['processorSpeed']"
+          (change)="onInputChange($event,'processorSpeed')"
+        ></mat-slider>
+        <div fxLayout="row" fxLayoutAlign="space-between">
+          <span>optional</span>
+          <span>must have</span>
+        </div>
+      </mat-card>
+
+      <mat-card fxLayout="column" formGroupName="hardDriveType" [ngClass]="arr['hardDriveType'] === 0 ? '' : 'mustHave'" [matTooltip]="onHover('hardDriveType')">
+        <mat-card-title>Hard Drive Type</mat-card-title>
+        <div *ngFor="let option of hardDriveTypes">
+          <mat-checkbox
+            (change)="onChange($event, 'hardDriveType', 'hardDriveTypeValue')"
+            [value]="option.id"
+            >{{ option.name }}</mat-checkbox
+          >
+        </div>
+        <mat-slider
+          formControlName="weight"
+          color="primary"
+          min="1"
+          max="5"
+          step="1"
+          *ngIf="!arr['hardDriveType']"
+          (change)="onInputChange($event,'hardDriveType')"
+        ></mat-slider>
+        <mat-slider
+          formControlName="weight"
+          color="warn"
+          min="1"
+          max="5"
+          step="1"
+          value="5"
+          *ngIf="arr['hardDriveType']"
+          (change)="onInputChange($event,'hardDriveType')"
+        ></mat-slider>
+        <div fxLayout="row" fxLayoutAlign="space-between">
+          <span>optional</span>
+          <span>must have</span>
+        </div>
+      </mat-card>
+
+      <mat-card fxLayout="column" formGroupName="hardDriveSize" [ngClass]="arr['hardDriveSize'] === 0 ? '' : 'mustHave'" [matTooltip]="onHover('hardDriveSize')">
+        <mat-card-title>Hard Drive Size</mat-card-title>
+        <div *ngFor="let option of hardDriveSizes">
+          <mat-checkbox
+            (change)="onChange($event, 'hardDriveSize', 'hardDriveSizeRange')"
+            [value]="option.id"
+            >{{ option.name }}</mat-checkbox
+          >
+        </div>
+        <mat-slider
+          formControlName="weight"
+          color="primary"
+          min="1"
+          max="5"
+          step="1"
+          *ngIf="!arr['hardDriveSize']"
+          (change)="onInputChange($event,'hardDriveSize')"
+        ></mat-slider>
+        <mat-slider
+          formControlName="weight"
+          color="warn"
+          min="1"
+          max="5"
+          step="1"
+          value="5"
+          *ngIf="arr['hardDriveSize']"
+          (change)="onInputChange($event,'hardDriveSize')"
+        ></mat-slider>
+        <div fxLayout="row" fxLayoutAlign="space-between">
+          <span>optional</span>
+          <span>must have</span>
+        </div>
+      </mat-card>
+
+      <mat-card fxLayout="column" formGroupName="operatingSystem" [ngClass]="arr['operatingSystem'] === 0 ? '' : 'mustHave'" [matTooltip]="onHover('operatingSystem')">
+        <mat-card-title>Operating System</mat-card-title>
+        <div *ngFor="let option of operatingSystems">
+          <mat-checkbox
+            (change)="
+              onChange($event, 'operatingSystem', 'operatingSystemValue')
+            "
+            [value]="option.id"
+            >{{ option.name }}</mat-checkbox
+          >
+        </div>
+        <mat-slider
+          formControlName="weight"
+          color="primary"
+          min="1"
+          max="5"
+          step="1"
+          *ngIf="!arr['operatingSystem']"
+          (change)="onInputChange($event,'operatingSystem')"
+        ></mat-slider>
+        <mat-slider
+          formControlName="weight"
+          color="warn"
+          min="1"
+          max="5"
+          step="1"
+          value="5"
+          *ngIf="arr['operatingSystem']"
+          (change)="onInputChange($event,'operatingSystem')"
+        ></mat-slider>
+        <div fxLayout="row" fxLayoutAlign="space-between">
+          <span>optional</span>
+          <span>must have</span>
+        </div>
+      </mat-card>
+
+      <mat-card fxLayout="column" formGroupName="ram" [ngClass]="arr['ram'] === 0 ? '' : 'mustHave'" [matTooltip]="onHover('ram')">
+        <mat-card-title>Ram Size</mat-card-title>
+        <div *ngFor="let option of ramOptions">
+          <mat-checkbox
+            (change)="onChange($event, 'ram', 'ramValue')"
+            [value]="option.id"
+            >{{ option.name }}</mat-checkbox
+          >
+        </div>
+        <mat-slider
+          formControlName="weight"
+          color="primary"
+          min="1"
+          max="5"
+          step="1"
+          *ngIf="!arr['ram']"
+          (change)="onInputChange($event,'ram')"
+        ></mat-slider>
+        <mat-slider
+          formControlName="weight"
+          color="warn"
+          min="1"
+          max="5"
+          step="1"
+          value="5"
+          *ngIf="arr['ram']"
+          (change)="onInputChange($event,'ram')"
+        ></mat-slider>
+        <div fxLayout="row" fxLayoutAlign="space-between">
+          <span>optional</span>
+          <span>must have</span>
+        </div>
+      </mat-card>
+
+      <mat-card fxLayout="column" formGroupName="itemWeight" [ngClass]="arr['itemWeight'] === 0 ? '' : 'mustHave'" [matTooltip]="onHover('itemWeight')">
+        <mat-card-title>Weight</mat-card-title>
+        <div *ngFor="let option of weights">
+          <mat-checkbox
+            (change)="onChange($event, 'itemWeight', 'itemWeightRange')"
+            [value]="option.id"
+            >{{ option.name }}</mat-checkbox
+          >
+        </div>
+        <mat-slider
+          formControlName="weight"
+          color="primary"
+          min="1"
+          max="5"
+          step="1"
+          *ngIf="!arr['itemWeight']"
+          (change)="onInputChange($event,'itemWeight')"
+        ></mat-slider>
+        <mat-slider
+          formControlName="weight"
+          color="warn"
+          min="1"
+          max="5"
+          step="1"
+          value="5"
+          *ngIf="arr['itemWeight']"
+          (change)="onInputChange($event,'itemWeight')"
+        ></mat-slider>
+        <div fxLayout="row" fxLayoutAlign="space-between">
+          <span>optional</span>
+          <span>must have</span>
+        </div>
+      </mat-card>
+
+      <mat-card-actions>
+        <button mat-raised-button type="submit" color="primary">Search</button>
+      </mat-card-actions>
+    </form>
+  </div>
+
+  <div class="listArea" fxLayout="column" fxLayoutAlign="start">
+    <div style="padding: 1rem" fxLayout="row" fxLayoutAlign="space-between">
+    <mat-form-field>
+      <input
+        matInput
+        (keyup)="applyFilter($event.target.value)"
+        placeholder="Filter"
+      />
+    </mat-form-field>
+
+    <mat-form-field >
+      <mat-select #select placeholder="Sort by:" (selectionChange)="sortTable($event.value)">
+        <mat-option *ngFor="let option of sortingOptions" [value]="option">
+          {{option}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    </div>
+
+    <table mat-table [dataSource]="dataSource" matSort *ngIf="laptops[0]">
+      <ng-container matColumnDef="image">
+        <th mat-header-cell *matHeaderCellDef>Product Image</th>
+        <td
+          mat-cell
+          *matCellDef="let element"
+          [routerLink]="['/details', element.asin]"
+        >
+          <img
+            style="width:120px"
+            src="{{ element.imagePath }}"
+            alt="Product Image"
+          />
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>Name</th>
+        <td
+          mat-cell
+          *matCellDef="let element"
+          [routerLink]="['/details', element.asin]"
+        >
+          <h3 class="title">{{ (element.productTitle.length > 100)? (element.productTitle | slice:0:100)+'..':(element.productTitle) }}</h3>
+          <h4 class="title">ID: {{element.asin}}</h4>
+          <star-rating  class="stars" *ngIf="element.avgRating" [starType]="'svg'" [rating]="element.avgRating"></star-rating>
+          <star-rating class="stars" *ngIf="!element.avgRating" [starType]="'svg'" [rating]="0"></star-rating>
+          <div *ngFor="let x of attributes">
+            <div *ngFor="let y of x | keyvalue">
+                <span class = "description" *ngIf="element[y.key]">{{y.key | titlecase}} : {{element[y.key]}}</span>
+              <div style="clear: both"></div>
+            </div>
+            <div style="clear: both"></div>
+          </div>
+          <div style="clear: both"></div>
+
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="price">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Price</th>
+        <td mat-cell class ="price" *matCellDef="let element"><h2>{{ element.price }} € </h2><br/>
+          <div class="flex-container" *ngIf="checkMatched(element.matched)">
+                <div class = "feedback" *ngFor="let x of attributes">
+                    <div *ngFor="let y of x | keyvalue">
+                        <div *ngIf="element.matched[y.key]=='green'" [ngClass]="arr[y.key] === 0 ? '' : 'mustHave'" class="element">
+                            <span>{{y.key | titlecase}} : {{ (y.value.length > 50)? (y.value | slice:0:50)+'..':(y.value) }}</span>
+                            <img src="../assets/images/check.jpg" />
+                        </div>
+                        <div *ngIf="element.matched[y.key]=='red' " class="element">
+                            <span>{{y.key | titlecase}} : {{ (y.value.length > 50)? (y.value | slice:0:50)+'..':(y.value) }}</span>
+                            <img src="../assets/images/x.jpg" />
+                        </div>
+                        <div *ngIf="element.matched[y.key]=='yellow' " class="element">
+                            <span>{{y.key | titlecase}} : {{ (y.value.length > 50)? (y.value | slice:0:50)+'..':(y.value) }}</span>
+                            <img src="../assets/images/question.png" />
+                        </div>
+                    </div>
+                </div>
+            <div style="clear: both"></div>
+          </div>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+
+    <mat-paginator
+      [pageSizeOptions]="[15, 25, 30]"
+      showFirstLastButtons
+    ></mat-paginator>
+  </div>
+</section>

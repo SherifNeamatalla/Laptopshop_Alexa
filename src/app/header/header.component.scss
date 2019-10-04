@@ -1,0 +1,16 @@
+mat-toolbar {
+  
+  .logoContainer {
+    width: 45%;
+    #logo {
+      height: 100px;
+      width: 100px;
+      left: 0px;
+      margin: -16px;
+      cursor: pointer;
+    }
+  }
+  .cartButton {
+    margin-right: 1rem;
+  }
+}
